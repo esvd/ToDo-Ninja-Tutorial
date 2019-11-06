@@ -14,7 +14,18 @@
     </v-app-bar>
 
     <v-navigation-drawer app class="primary" v-model="drawer">
-      <p>Text</p>
+      <v-list flat>
+        <v-list-item-group>
+          <v-list-item v-for="(link, i) in links" :key="i" router :to="link.route">
+            <v-list-item-icon>
+              <v-icon class="white--text" v-text="link.icon"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="white--text" v-text="link.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
     </v-navigation-drawer>
   </div>
 </template>
@@ -23,7 +34,12 @@
 export default {
   data() {
     return {
-      drawer: true
+      drawer: true,
+      links: [
+        { icon: "dashboard", text: "Dashboard", route: "/" },
+        { icon: "folder", text: "My Projects", route: "/projects" },
+        { icon: "person", text: "Team", route: "/team" }
+      ]
     };
   }
 };
