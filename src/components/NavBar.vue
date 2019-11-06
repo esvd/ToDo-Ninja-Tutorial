@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <nav>
     <v-app-bar color="grey lighten-5" flat>
       <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-uppercase grey--text">
+      <v-toolbar-title class="hidden-sm-and-down text-uppercase grey--text">
         <span class="font-weight-light">todo</span>
         <span>ninja</span>
       </v-toolbar-title>
@@ -27,7 +27,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </div>
+  </nav>
 </template>
 
 <script>

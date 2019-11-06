@@ -2,7 +2,9 @@
   <v-app>
     <v-content>
       <NavBar />
-      <router-view></router-view>
+      <div class="mx-4">
+        <router-view></router-view>
+      </div>
     </v-content>
   </v-app>
 </template>
@@ -13,6 +15,11 @@ export default {
   name: "App",
   components: {
     NavBar
+  },
+  data() {
+    return {
+      //
+    };
   }
 };
 </script>
