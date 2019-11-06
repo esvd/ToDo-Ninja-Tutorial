@@ -1,6 +1,6 @@
 <template>
-  <nav>
-    <v-app-bar color="grey lighten-5" flat app>
+  <div>
+    <v-app-bar color="grey lighten-5" flat>
       <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">todo</span>
@@ -12,8 +12,11 @@
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer class="drawer" v-model="drawer" app></v-navigation-drawer>
-  </nav>
+
+    <v-navigation-drawer app class="primary" v-model="drawer">
+      <p>Text</p>
+    </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
