@@ -1,15 +1,29 @@
 <template>
   <div class="team">
     <h1 class="subheading grey--text">Team</h1>
-    <v-container fluid class="my-5">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ipsum neque recusandae voluptatem odit ut nobis iusto
-        voluptas aperiam distinctio nemo facilis vero voluptatum eveniet, consequatur temporibus, omnis quia possimus!
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque consequuntur recusandae nam? Quod rerum dolores molestiae
-        laboriosam vitae. Maxime nam quaerat laudantium. Explicabo ullam odio quo iure praesentium quibusdam accusantium!
-      </p>
+    <v-container class="my-5">
+      <v-row no-gutters>
+        <v-col xs="12" md="6">
+          <v-btn outlined block class="primary">1</v-btn>
+        </v-col>
+        <v-col xs="4" md="2">
+          <v-btn outlined block class="primary">2</v-btn>
+        </v-col>
+        <v-col xs="4" md="2">
+          <v-btn outlined block class="primary">3</v-btn>
+        </v-col>
+        <v-col xs="4" md="2">
+          <v-btn outlined block class="primary">4</v-btn>
+        </v-col>
+      </v-row>
+      <v-row justify="space-around">
+        <v-col xs="4" md="4">
+          <v-btn outlined block class="primary">1</v-btn>
+        </v-col>
+        <v-col xs="4" md="4">
+          <v-btn outlined block class="primary">2</v-btn>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
