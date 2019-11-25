@@ -57,21 +57,18 @@ export default {
     return {
       projects: [
         {
-          id: 1,
           title: "Learn Vuetify",
           person: "Vinicius",
           due: "16th Nov 2020",
           status: "Overdue"
         },
         {
-          id: 2,
           title: "Develop an Emacs package for code completion",
           person: "Richard Stalmann",
           due: "26th Mar 2010",
           status: "Complete"
         },
         {
-          id: 3,
           title: "Implement kernel modules for new AMD processsor arch",
           person: "Linus Torvalds",
           due: "2nd Jan 2020",
