@@ -27,14 +27,19 @@
     </v-app-bar>
 
     <v-navigation-drawer app class="primary" v-model="drawer" temporary>
-      <v-row class="mt-5" align="center" justify="center">
-        <v-col cols="6">
+      <v-col cols="12">
+        <v-row justify="center" align="center">
           <v-avatar size="100">
             <img src="/avatar-1.png" />
           </v-avatar>
-          <p class="white--text subheading">The Net Ninja</p>
-        </v-col>
-      </v-row>
+        </v-row>
+        <v-row justify="center" align="center">
+          <p class="white--text subheading mt-1">The Net Ninja</p>
+        </v-row>
+        <v-row class="mt-4" justify="center" align="center">
+          <Popup />
+        </v-row>
+      </v-col>
       <v-list flat>
         <v-list-item-group>
           <v-list-item v-for="(link, i) in links" :key="i" router :to="link.route">
@@ -52,9 +57,13 @@
 </template>
 
 <script>
+import Popup from "./Popup.vue";
+
 export default {
+  components: { Popup },
   data() {
     return {
+      on: false,
       drawer: true,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/" },
