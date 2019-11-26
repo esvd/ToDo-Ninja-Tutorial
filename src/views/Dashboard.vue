@@ -22,7 +22,12 @@
           <span>Sort projects by Person</span>
         </v-tooltip>
       </v-row>
-      <v-card flat v-bind:class="`pa-3`" v-for="(project, id) in projects" :key="id">
+      <v-card
+        flat
+        v-bind:class="`pa-3`"
+        v-for="(project, id) in projects"
+        :key="id"
+      >
         <v-row no-gutters v-bind:class="`pa-3 project ${project.status}`">
           <v-col cols="12" md="6">
             <div class="caption grey--text">Project title</div>
@@ -52,6 +57,8 @@
 </template>
 
 <script>
+import { log } from "util";
+
 export default {
   data() {
     return {
@@ -92,24 +99,23 @@ export default {
     },
     sortBy(prop) {
       this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+    },
+    displaySize() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "lg":
+          log("LG");
+          break;
+        case "md":
+          log("MD");
+          break;
+        case "sm":
+          log("SM");
+          break;
+        case "xs":
+          log("XS");
+          break;
+      }
     }
-    // displaySize() {
-    //   /* eslint-disable no-console */
-    //   switch (this.$vuetify.breakpoint.name) {
-    //     case "lg":
-    //       console.log("LG");
-    //       break;
-    //     case "md":
-    //       console.log("MD");
-    //       break;
-    //     case "sm":
-    //       console.log("SM");
-    //       break;
-    //     case "xs":
-    //       console.log("XS");
-    //       break;
-    //   }
-    // }
   }
 };
 </script>
