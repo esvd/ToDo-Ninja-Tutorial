@@ -53,6 +53,7 @@
 <script>
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
+import db from "@/fb.js";
 
 export default {
   data() {
@@ -70,7 +71,16 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        this.$refs.form.reset();
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: format(parseISO(this.due), "do MMM yyyy"),
+          person: "The Net Ninja",
+          status: "Ongoing"
+        };
+        db.collection("projects")
+          .add(project)
+          .then(() => this.$refs.form.reset());
       }
     }
   },
