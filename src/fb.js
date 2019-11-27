@@ -16,4 +16,33 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export default db;
+function fetchDataInto(projects = [], personFilter = "") {
+  var collection = db.collection("projects");
+  if (personFilter.trim() !== "") {
+    collection = collection.where("person", "==", personFilter);
+  }
+  collection.onSnapshot(res => {
+    const changes = res.docChanges();
+
+    changes.forEach(change => {
+      if (change.type === "added") {
+        projects.push({
+          ...change.doc.data(),
+          id: change.doc.id
+        });
+      }
+    });
+  });
+}
+
+function addNewProject(project = {}, object) {
+  db.collection("projects")
+    .add(project)
+    .then(() => {
+      object.loading = false;
+      object.dialog = false;
+      object.$emit("projectAdded");
+    });
+}
+
+export { db, fetchDataInto, addNewProject };

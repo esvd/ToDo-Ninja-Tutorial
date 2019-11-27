@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import db from "@/fb.js";
+import { fetchDataInto } from "@/fb.js";
 import { log } from "util";
 
 export default {
@@ -26,20 +26,7 @@ export default {
     };
   },
   created() {
-    db.collection("projects")
-      .where("person", "==", "Vinicius")
-      .onSnapshot(res => {
-        const changes = res.docChanges();
-
-        changes.forEach(change => {
-          if (change.type === "added") {
-            this.projects.push({
-              ...change.doc.data(),
-              id: change.doc.id
-            });
-          }
-        });
-      });
+    fetchDataInto(this.projects, "Vinicius");
   },
   computed: {
     myProjects() {

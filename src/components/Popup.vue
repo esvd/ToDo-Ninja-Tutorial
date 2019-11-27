@@ -36,7 +36,7 @@
 <script>
 import format from "date-fns/format";
 import parseISO from "date-fns/parseISO";
-import db from "@/fb.js";
+import { addNewProject } from "@/fb.js";
 
 export default {
   data() {
@@ -64,13 +64,7 @@ export default {
           person: "Vinicius",
           status: "Ongoing"
         };
-        db.collection("projects")
-          .add(project)
-          .then(() => {
-            this.loading = false;
-            this.dialog = false;
-            this.$emit("projectAdded");
-          });
+        addNewProject(project, this);
       }
     }
   },
