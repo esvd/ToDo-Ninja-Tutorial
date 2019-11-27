@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="600px">
+  <v-dialog max-width="600px" v-model="dialog">
     <template v-slot:activator="{ on }">
       <v-btn text v-on="on" class="success">Add New Project</v-btn>
     </template>
@@ -8,25 +8,11 @@
         <h2>Add a New Project</h2>
       </v-card-title>
       <v-form class="px-3" ref="form" v-model="validateForm" lazy-validation>
-        <v-text-field
-          label="title"
-          v-model="title"
-          prepend-icon="folder"
-          :rules="titleRule"
-        ></v-text-field>
-        <v-textarea
-          label="Information"
-          v-model="content"
-          prepend-icon="edit"
-          :rules="contentRule"
-        ></v-textarea>
+        <v-text-field label="title" v-model="title" prepend-icon="folder" :rules="titleRule"></v-text-field>
+        <v-textarea label="Information" v-model="content" prepend-icon="edit" :rules="contentRule"></v-textarea>
         <v-row justify="start">
           <v-col cols="6">
-            <v-menu
-              class="px-3"
-              v-model="datePickMenu"
-              :close-on-content-click="false"
-            >
+            <v-menu class="px-3" v-model="datePickMenu" :close-on-content-click="false">
               <template v-slot:activator="{ on }">
                 <v-text-field
                   prepend-icon="date_range"
@@ -37,14 +23,11 @@
                   :rules="dueDateRule"
                 ></v-text-field>
               </template>
-              <v-date-picker
-                v-model="due"
-                @change="datePickMenu = false"
-              ></v-date-picker>
+              <v-date-picker v-model="due" @change="datePickMenu = false"></v-date-picker>
             </v-menu>
           </v-col>
         </v-row>
-        <v-btn text class="success my-3" @click="submit">Add Project</v-btn>
+        <v-btn text class="success my-3" @click="submit" :loading="loading">Add Project</v-btn>
       </v-form>
     </v-card>
   </v-dialog>
@@ -65,12 +48,15 @@ export default {
       due: null,
       titleRule: [r => !!r || "A project must have a title!"],
       contentRule: [r => !!r || "Write a project information!"],
-      dueDateRule: [r => !!r || "Please, set a due date."]
+      dueDateRule: [r => !!r || "Please, set a due date."],
+      loading: false,
+      dialog: false
     };
   },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
+        this.loading = true;
         const project = {
           title: this.title,
           content: this.content,
@@ -80,7 +66,11 @@ export default {
         };
         db.collection("projects")
           .add(project)
-          .then(() => this.$refs.form.reset());
+          .then(() => {
+            this.loading = false;
+            this.dialog = false;
+            this.$emit("projectAdded");
+          });
       }
     }
   },
