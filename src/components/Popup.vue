@@ -61,7 +61,7 @@ export default {
           title: this.title,
           content: this.content,
           due: format(parseISO(this.due), "do MMM yyyy"),
-          person: "The Net Ninja",
+          person: "Vinicius",
           status: "Ongoing"
         };
         db.collection("projects")

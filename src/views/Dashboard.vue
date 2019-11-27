@@ -22,12 +22,7 @@
           <span>Sort projects by Person</span>
         </v-tooltip>
       </v-row>
-      <v-card
-        flat
-        v-bind:class="`pa-3`"
-        v-for="(project, id) in projects"
-        :key="id"
-      >
+      <v-card flat v-bind:class="`pa-3`" v-for="(project, id) in projects" :key="id">
         <v-row no-gutters v-bind:class="`pa-3 project ${project.status}`">
           <v-col cols="12" md="6">
             <div class="caption grey--text">Project title</div>
@@ -57,36 +52,30 @@
 </template>
 
 <script>
+import db from "@/fb.js";
 import { log } from "util";
 
 export default {
   data() {
     return {
-      projects: [
-        {
-          title: "Learn Vuetify",
-          person: "Vinicius",
-          due: "16th Nov 2020",
-          status: "Overdue"
-        },
-        {
-          title: "Develop an Emacs package for code completion",
-          person: "Richard Stalmann",
-          due: "26th Mar 2010",
-          status: "Complete"
-        },
-        {
-          title: "Implement kernel modules for new AMD processsor arch",
-          person: "Linus Torvalds",
-          due: "2nd Jan 2020",
-          status: "Ongoing"
-        }
-      ]
+      projects: []
     };
   },
   created() {
-    window.addEventListener("resize", this.displaySize);
+    // window.addEventListener("resize", this.displaySize);
     // this.displaySize();
+    db.collection("projects").onSnapshot(res => {
+      const changes = res.docChanges();
+
+      changes.forEach(change => {
+        if (change.type === "added") {
+          this.projects.push({
+            ...change.doc.data(),
+            id: change.doc.id
+          });
+        }
+      });
+    });
   },
   destroyed() {
     window.removeEventListener("resize", this.displaySize);
